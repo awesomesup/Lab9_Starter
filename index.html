@@ -84,8 +84,12 @@
       <button>End Timer</button>
       <button>Console Trace</button>
       <button>Trigger a Global Error</button>
+      <button>try catch throw tester</button>
+      <button>custom error test</button>
     </section>
   </main>
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 
   <script>
     let form = document.querySelector('form');
@@ -102,7 +106,136 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+
+    //buttons for console testing 
+
+    let cLog = errorBtns[0];
+    let cErr = errorBtns[1];
+    let cCount = errorBtns[2];
+    let cWarn = errorBtns[3];
+    let cAssert = errorBtns[4];
+    let cClear = errorBtns[5];
+    let cDir = errorBtns[6];
+    let cXml = errorBtns[7];
+    let cGrpStart = errorBtns[8];
+    let cGrpEnd = errorBtns[9];
+    let cTable = errorBtns[10];
+    let cTmrStart = errorBtns[11];
+    let cTmrEnd = errorBtns[12];
+    let cTrace = errorBtns[13];
+    let cGlobalErr = errorBtns[14];
+    let cTC = errorBtns[15];
+    let cCustomErr = errorBtns[16];
+
+
+    cLog.addEventListener("click", () => {
+      console.log("Console Log");
+    });
+
+    cErr.addEventListener("click", () => {
+      console.error("Console Error");
+    });
+
+    cCount.addEventListener("click", () => {
+      console.count("Console Count");
+    });
+
+    cWarn.addEventListener("click", () => {
+      console.warn("Console Warn");
+    });
+
+    cAssert.addEventListener("click", () => {
+      let number = 69;
+      console.assert(number == 3,`{number: ${number}, errorMessage: 'The number does not equal to 3}`)
+    });
+
+    cClear.addEventListener("click", () => {
+      console.clear();
+    });
+
+    cDir.addEventListener("click", () => {
+      console.dir(cDir);
+    });
+
+    cXml.addEventListener("click", () => {
+      console.dirxml(cXml);
+    });
+
+    cGrpStart.addEventListener("click", () => {
+      console.group("Console Group Start");
+    });
+
+    cGrpEnd.addEventListener("click", () => {
+      console.groupEnd("Console Group End");
+    });
+
+    cTable.addEventListener("click", () => {
+
+      let pokemonTable = [
+        {pokemonType : "Fire", pokemonName : "Charizard"},
+        {pokemonType : "Water", pokemonName : "Blastoise"},
+        {pokemonType : "Grass", pokemonName : "Venasaur"}
+      ];
+      console.table(pokemonTable);
+    });
+
+    cTmrStart.addEventListener("click", () => {
+      console.time("Timer");
+    });
+
+    cTmrEnd.addEventListener("click", () => {
+      console.timeEnd("Timer");
+    });
+
+    cTrace.addEventListener("click", () => {
+
+      let deep = () => {deeper()};
+      let deeper = () => {deepest()};
+      let deepest = () => {console.trace("Console Trace")};
+      let handleBtnClick = () => {deep()}; //added this to make it look like the demo
+
+      handleBtnClick();
+    });
+
+    
+    cGlobalErr.addEventListener("click", () => {
+      console.log("sadly, an error occured my friend");
+      boom();  
+    });
+
+
+    cTC.addEventListener("click", () => {
+      let inp_10 = prompt("input the meaning of life")
+      try {
+        alert(aintGonnaWork())
+      }catch {
+        alert("Nope")
+      }finally {
+        alert(`The meaning of life is not ${inp_10} unfortunately.`)
+      }
+    })
+
+    cCustomErr.addEventListener("click", () => {
+      let FavPokemon = prompt("Enter the strongest starter Pokemon ?");
+      try {
+         if (FavPokemon == "Charmander") throw "Charmander, Correct!";
+         else if (FavPokemon == "charmander") throw "charmander, Correct!"; 
+         else throw "a Fire Type, Try Again!"; 
+      }
+      catch (err) {
+        console.log("caught error")
+        alert("The strongest starter is " + err);
+      }
+    });
+    window.TrackJS && TrackJS.install({ 
+
+      token: "ae20712219024665b1a312a6ef916cf3"
+
+      // for more configuration options, see https://docs.trackjs.com
+    });
   </script>
+
 </body>
 
 </html>
